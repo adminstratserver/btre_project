@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} | About Us {% endblock %}
+
+{% block content %}
+
+  <section id="about" class="py-4">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h2>IB Gateway Configuration SetUp</h2>
+          <p class="lead">The following settings would allow OptionNalytics Bot Server (Stratserver) authorisation to place trades at your IB workstation. <br> At your IB Gateway application, go to Configure->Settings->API Settings</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<div class="container">
+      <div class="row text-center">
+
+
+          <ul>a. Set the socket port for API communication: <b>7496 </b></ul>
+          <ul>b. Add the IP address <b>162.144.56.84</b> (IP address of OptionNalytics Stratserver) to the list of Trusted IP Addresses.</ul>
+          <ul>c. Check the boxes are ticked based on the below diagram.</ul>
+
+          <img src="{% static 'img/ibgateway.png' %}" alt="">
+          <p class="mt-4">At OptionNalytics.. we use the power of technology to perform recursive work as well as use DA modeling to help analyse all data points and build trade simulation and models that mimics actual trading sessions, in doing so to get the closest possible end-results with the fastest possible time.
+           Our Data Analytics modeling is mainly based on three well-known models of Data Analytics – Descriptive Analytics, Diagnostics Analytics and Prescriptive Analytics.</p>
+        </div>
+      </div>
+</div>
+
+
+
+
+{% endblock %}

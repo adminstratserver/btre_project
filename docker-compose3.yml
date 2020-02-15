@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  web123:
+    container_name: btre_container123
+    networks:
+      - btre_net123
+    tty: true
+    build: ./app
+    volumes:
+      - ./app/:/usr/src/app/
+    ports:
+      - 8000:8000
+    depends_on:
+      - db123
+  db123:
+    container_name: postgres_container123
+    networks:
+      - btre_net123
+    ports:
+      - 5432:5432
+    tty: true
+    image: postgres:9.6-alpine
+    environment:
+      POSTGRES_PASSWORD: password1234
+    volumes:
+      - postgres_data123:/var/lib/postgresql/data/
+networks:
+  btre_net123:
+volumes:
+  postgres_data123:

@@ -1,0 +1,43 @@
+{% extends 'base.html' %} 
+
+{% load static %}
+
+{% block title %} | Services {% endblock %}
+
+{% block content %}
+<section id="showcase-inner" class="py-5 text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="display-4">Trading Software As A Service</h1>
+          <p class="lead">Automating Trade Orders At Client’s Interactive-Broker Trading Plaform</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="about" class="py-4">
+    <div class="container">
+      <div class="row text-left">
+        <div class="col-md-12">
+
+          <p>As a SaaS service provider, our system automates trade orders directly into our client's trading plaform. It is no different from outsourcing the monitoring and trade executions based on your choice of a trading algorithm. </p>
+
+  <div class="row text-left">
+
+          <ul>This is a simple 3 steps process as follows:</ul><br><br>
+
+          <ul>1. Client select the trading algorithm file based on his risk-rewards appetite from the large range of algorithm files (OptionNalytics Algo-Library).</ul>
+          <ul>2. A dedicated server (OptionNalytics Stratserver) is setup which is loaded with the algo-file, and the server is connected to the client's IB trading PC via internet. Stratserver is given authorisation by client's PC to send trade orders into IB trading platform.</ul>
+          <ul>3. When the rule-based algo triggers a trade order and execution, the trade order is sent from Stratserver to the client's trading PC. An alert notification message is also sent to the clients HP.</ul>
+   </div>
+
+
+          <img src="{% static 'img/ourservices.png' %}" alt="">
+          <p class="mt-4"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

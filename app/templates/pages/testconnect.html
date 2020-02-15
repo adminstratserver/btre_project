@@ -1,0 +1,46 @@
+{% extends 'base.html' %} 
+
+{% load static %}
+
+{% block title %} | IB Connectivity {% endblock %}
+
+{% block content %}
+
+  <section id="about" class="py-4">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h2>Test Connectivity To Your IB Account</h2>
+          <p class="mt-4">To test connectivity, we will send a small trade order to your IB account.
+              <br>Don't worry the trade will not be filled as the limit price is set to a very low value.
+              <br>If you need to change your hostname, please go to Settings->My Particulars</p>
+          <img src="{% static 'img/connect.png' %}" alt="">
+          <p class="mt-4">
+          <li>Make sure your IB account is configured correctly.. to see IB setting, click <a href="{% url 'ibgatewayconfig' %}"><u>HERE</u></a> </li>
+          <li>Make sure your PC is set to correct Hostname.. to know more about Hostname, click <a href="{% url 'hostnameconfig' %}"><u>HERE</u></a> </li>
+            <br>
+            {% for obj in profile1 %}
+             {% if obj.ibHostname %}
+              Hostname: <b> {{ obj.ibHostname }} </b> <br><br>
+
+              <form action="" method="post">
+               {% csrf_token %}
+               <input type="submit" value="Test Connection">
+              </form>
+
+             {% else %}
+          <b>You have not assigned a Hostname to your IP address!</b>
+             {% endif %}
+          {% endfor %}
+            <br><br>
+
+
+
+
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

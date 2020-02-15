@@ -1,0 +1,168 @@
+{% extends 'base.html' %} 
+
+{% load humanize %}
+
+{% block title %} | Welcome {% endblock %}
+
+{% block content %}
+
+<!-- Showcase -->
+<section id="showcase">
+    <div class="container text-center">
+      <div class="home-search p-5">
+        <div class="overlay p-5">
+          <h1 class="display-4 mb-4">
+            Algorithmic Trading Made Easy
+          </h1>
+          <p class="lead">Search From Our Library Of Option Strategies</p>
+          <div class="search">
+            <form action="{% url 'search' %}">
+              <!-- Form Row 1 -->
+              <div class="form-row">
+                <div class="col-md-4 mb-3">
+                  <label class="sr-only">Keywords</label>
+                  <input type="text" name="keywords" class="form-control" placeholder="Keyword (butterfly, condor, etc)">
+                </div>
+
+                <div class="col-md-4 mb-3">
+                  <select name="price" class="form-control" id="type">
+                    <option selected="true" disabled="disabled">Minimum Investment Amount</option>
+                    {% for key,value in price_choices.items %}
+                      <option value="{{ key }}">{{ value }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <!--
+                <div class="col-md-4 mb-3">
+                  <label class="sr-only">City</label>
+                  <input type="text" name="city" class="form-control" placeholder="City">
+                </div> -->
+
+                <div class="col-md-4 mb-3">
+                   <label class="sr-only">State</label>
+                  <select name="marketbias" class="form-control">
+                    <option selected="true" disabled="disabled">Market Bias</option>
+                    {% for key,value in mktbias_choices.items %}
+                      <option value="{{ key }}">{{ value }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+
+              <button class="btn btn-lg btn-success mt-5" type="submit">Search Library</button>
+              <!-- <button class="btn btn-secondary btn-block mt-4" type="submit">Submit form</button> -->
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<br>
+  <!-- Alerts -->
+  {% include 'partials/_alerts.html' %}
+
+  <!-- Listings -->
+  <section id="listings" class="py-5">
+    <div class="container">
+      <h3 class="text-center mb-3">Latest Algorithms</h3>
+      <div class="row">
+        {% if listings %}
+          {% for listing in listings %}
+            <!-- Listing 1 -->
+            <div class="col-md-6 col-lg-4 mb-4">
+              <div class="card listing-preview">
+                <img class="card-img-top" src="{{ listing.photo_main.url }}" alt="">
+                <div class="card-img-overlay">
+                  <h3>
+                     <span class="badge badge-secondary text-white">{{ listing.promotion }}</span>
+                  </h3>
+                </div>
+                <div class="card-body">
+                   {% if alldevelopers %}
+                   {% for developer in alldevelopers %}
+                  <div class="listing-heading text-center">
+                    <h4 class="text-primary">{{ listing.title }}</h4>
+                    <!-- <p>
+                      <i class="fas fa-map-marker text-secondary"></i> {{ listing.city }} {{ listing.state }}, {{ listing.zipcode }}</p>  -->
+                  </div>
+                  <hr>
+                  <div class="row py-2 text-secondary">
+
+                     <div class="col-6">
+                      <i class="fas fa-chart-line"> </i> Bias: {{ listing.marketbias }}</div>
+                     <div class="col-6">
+                       <!-- <i class="fas fa-hand-holding-usd"></i> Min Sum: {{ listing.price }}</div> -->
+                       <i class="fas fa-search-dollar"></i> MinSum: ${{ listing.price | intcomma }}</div>
+                       <!-- <i class="fas fa-dollar-sign"></i>Min Sum: {{ listing.price }}</div> -->
+
+                    <!-- <div class="col-6">
+                      <i class="fas fa-th-large"></i> Sqft: {{ listing.sqft }}</div> -->
+                    <!-- <div class="col-6">
+                      <i class="fas fa-car"></i> Garage: {{ listing.garage }}</div> -->
+                  </div>
+                  <div class="row py-2 text-secondary">
+
+                    <div class="col-6">
+                      <i class="far fa-smile-beam"></i> MaxProfit: {{ listing.maxprofit }}</div>
+                    <div class="col-6">
+                      <i class="far fa-angry"></i> MaxLoss: {{ listing.maxloss }}</div>
+
+                    <!-- <div class="col-6">
+                      <i class="fas fa-bed"></i> Bedrooms: {{ listing.bedrooms }}</div> -->
+                    <!-- <div class="col-6">
+                      <i class="fas fa-bath"></i> Bathrooms: {{ listing.bathrooms }}</div> -->
+                  </div>
+                  <hr>
+                  <div class="row py-1 text-secondary text-center">
+                    <div class="col-12">
+                      <i class="fas fa-user"></i> Developer: {{ developer.get_first_name }} {{ developer.get_last_name }} </div>
+                  </div>
+                  <!-- <div class="row text-secondary pb-2">
+                    <div class="col-6">
+                      <i class="fas fa-clock"></i> {{ listing.list_date | timesince }}</div>
+                  </div> -->
+                  <hr>
+                  <a href="{% url 'listing' listing.id %}" class="btn btn-primary btn-block">More Info</a>
+                  {% endfor %}
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="col-md-12">
+            <p>No Listings Available</p>
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="py-5 bg-secondary text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-4">
+          <i class="fas fa-comment fa-4x mr-4"></i>
+          <hr>
+          <h3>Consulting Services</h3>
+          <p>We help traders with good trading strategies create a new business track where they can monetize their trade strategies through the use of technology in algorithmic trading.</p>
+        </div>
+        <div class="col-md-4">
+          <!-- <i class="fa fa-home fa-4x mr-4"></i> -->
+          <i class="fa fa-code fa-4x mr-4"></i>
+          <hr>
+          <h3>Strategy Digitalization</h3>
+          <p>We provide the tools to convert trading strategies into trade algorithms as well as back-testing environments in various markets to further improve their strategies.</p>
+        </div>
+        <div class="col-md-4">
+          <!-- <i class="fas fa-piggy-bank" fa-4x mr-4></i>  -->
+           <i class="fas fa-toolbox fa-4x mr-4"></i>
+          <hr>
+          <h3>Algo-Trading Service</h3>
+          <p>We provide a Trading-As-A-Service platform where algo developers lease their algorithms and retail traders to subscribe to the algorithm that suits their risk-reward appetite.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

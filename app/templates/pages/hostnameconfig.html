@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} | About Us {% endblock %}
+
+{% block content %}
+
+  <section id="about" class="py-4">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h2>Hostname Configuration SetUp</h2>
+          <p class="lead">Your trading PC (IB Gateway PC) may be connected to internet via a dynamic IP address that is assigned by your ISP. <br>To ensure the trade orders reaches your trading PC, its important to associate your IP address with a Hostname.<br>You may do so using services from Dynamic DNS (DDNS) Host Providers.</p>
+
+        <div class="col-md-12">
+          <p class="lead">The following is list of recommended DDNS host providers: </p>
+
+            <ul class="list-group">
+            <ul><a href="https://www.noip.com"><u>NO-IP</u></a></ul>
+            <ul><a href="https://dyn.com/"><u>Oracle Dynamic DNS</u></a></ul>
+            <ul><a href="https://www.securepoint.de/en/products/nextgen-utm-firewalls/securepoint-dyndns.html"><u>SecurePoint</u></a></ul>
+            <ul><a href="https://dyndnss.net/eng/"><u>DYNDNS Service</u></a></ul>
+            </ul>
+
+
+        </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+<div class="container">
+
+    <div class="row text-center">
+
+                <p class="mt-4">Finally, the client PC is usually sitting behind a domestic router having its its internal router address ie. 192.168.XXX.XXX.
+                    The last step is to setup the router to port forward all incoming messages to via port <b>7496</b> to the trading PC.</p>
+
+          <img src="{% static 'img/hostname.png' %}" alt="">
+
+        </div>
+      </div>
+</div>
+
+
+
+
+{% endblock %}

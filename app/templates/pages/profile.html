@@ -1,0 +1,104 @@
+{% extends 'base.html' %} 
+
+{% load static %}
+
+{% block title %} | Partner {% endblock %}
+
+{% block content %}
+
+
+<div class="container">
+  <div class=".col-xs-4 .col-md-offset-2">
+    <div class="panel panel-default panel-info Partner">
+		<br><br>
+      <!-- <div class="panel-heading"> My Partner </div>  -->
+      <div class="alert alert-success">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <!-- <strong>Success!</strong> Partner successfully saved
+      </div>
+      <div class="alert alert-warning">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Oops!</strong> Partner not saved. Try later.
+      </div>  -->
+      <div class="panel-body">
+        <div class="form-horizontal">
+
+			<div class="card-body">
+              <!-- Alerts -->
+              {% include 'partials/_alerts.html' %}
+              <form action="{% url 'memberProfile' %}" method="POST">
+                  {% csrf_token %}
+
+                  <!--
+				  Display 007 <br><br>
+				 	 user.user: {{ user.user }} <br>
+				  user.user_id: {{ user.user_id }} <br>
+				  user.id: {{ user.id }} <br>
+				  user.username: {{ user.username }} <br>
+				  user.firstname: {{ user.first_name }} <br>
+				  user.firstname: {{ user.last_name }} <br>
+				  user.email: {{ user.email }} <br><br>
+
+				  Profile1:  {{ profile1 }} <br><br>
+
+				  User:  {{ user }} <br><br>
+
+				  {% for obj in profile1 %}
+				  Hostname01 = {{ obj.ibHostname }} <br><br>
+				  isPartner01 = {{ obj.isPartner }} <br><br>
+
+				  {% endfor %}
+				  Hostname02 = {{ profile1.ibHostname }}
+                  -->
+
+										<div class="form-group">
+
+							                <label class="col-sm-2 control-label">First Name</label>
+											<div class="col-sm-4">
+                								<input class="form-control" type="text" name="name" placeholder="{{ user.name }}" ng-model="me.firstName">
+              								</div>
+            							</div>
+						                <div class="form-group">
+              							    <label class="col-sm-2 control-label">Email</label>
+              							    <div class="col-sm-4">
+                								<input class="form-control" type="text" name="email" placeholder="{{ user.email }}" ng-model="me.email">
+              							    </div>
+            						    </div>
+            							<div class="form-group">
+              							    <label class="col-sm-4 control-label">IB Hostname</label>
+              							    <div class="col-sm-4">
+												{% for obj in profile1 %}
+                								<input class="form-control" type="text" name="ibHostname" placeholder="{{ obj.ibHostname }}" ng-model="me.hostname">
+              							        {% endfor %}
+											</div>
+            						    </div>
+
+
+
+                <input type="submit" value="Change" class="btn btn-secondary btn-block">
+              </form>
+ </div>
+
+
+
+
+
+
+
+
+
+
+		</div>  <!-- end form-horizontal -->
+      </div> <!-- end panel-body -->
+
+    </div> <!-- end panel -->
+
+
+  </div> <!-- end size -->
+</div> <!-- end container-fluid -->
+
+
+
+
+
+{% endblock %}
