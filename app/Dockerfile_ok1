@@ -22,12 +22,11 @@ RUN apt-get update && apt-get install -y \
     postgresql-contrib \
     nginx
 
+# install dependencies
+#RUN pip install --upgrade pip
+
 COPY ./requirements4.txt /usr/src/app/requirements4.txt
 RUN pip3 install -r requirements4.txt
 
 # copy project
 COPY . /usr/src/app/
-
-# run entrypoint.sh
-ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
-
