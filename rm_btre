@@ -1,4 +1,6 @@
 docker rm $(docker ps -aq) -f
 docker volume rm btre_project_postgres_data
+docker volume rm btre_project_postgresProd_data
 docker network rm btre_project_btre_net
+docker network rm btre_project_btreProd_net
 

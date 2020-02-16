@@ -1,0 +1,45 @@
+version: '3.7'
+
+services:
+  web_prod:
+    container_name: btreProd_container
+    build:
+      context: ./app
+      dockerfile: Dockerfile.prod
+    command: gunicorn btre.wsgi:application --bind 0.0.0.0:8000
+    networks:
+      - btreProd_net
+    tty: true
+    expose:
+      - 8000
+    env_file:
+      - ./.env.prod
+    depends_on:
+      - db
+  db:
+    container_name: postgresProd_container
+    networks:
+      - btreProd_net
+    ports:
+      - 5432:5432
+    tty: true
+    image: postgres:9.6-alpine
+    environment:
+      POSTGRES_PASSWORD: password1234    
+    volumes:
+      - postgresProd_data:/var/lib/postgresql/data/
+      - ./init.sql:/docker-entrypoint-initdb.d/initProd.sql
+  nginx:
+    container_name: nginxProd_container
+    build: ./nginx
+    ports:
+      - 1337:80
+    networks:
+      - btreProd_net 
+    depends_on:
+      - web_prod
+
+networks:
+  btreProd_net:
+volumes:
+  postgresProd_data:
