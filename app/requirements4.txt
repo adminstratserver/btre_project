@@ -1,7 +1,7 @@
 django==2.2.6
 psycopg2==2.8.3
 psycopg2-binary==2.8.3
-Pillow==6.1.0
+Pillow==9.0.0
 django-crispy-forms==1.7.2
 stripe==2.37.2
 ib_insync==0.9.56
